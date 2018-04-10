@@ -1,0 +1,16 @@
+{
+  "mockDirectory": "./apimock",
+  "quiet": false,
+  "port": "8060",
+  "webServices": {
+    "api/contacts": {
+      "mockFile": "contacts.json",
+      "verbs": ["get"]
+    },
+    "api/contacts-delay": {
+      "mockFile": "contacts.json",
+      "verbs": ["get"],
+      "latency": 1500
+    }
+  }
+}
