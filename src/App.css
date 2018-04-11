@@ -1,5 +1,5 @@
 .Root_Div {
-    background-color: #ecd1f7;
+    background-color: #FCFBEF;
     height: 100vh;
 }
 
@@ -10,14 +10,14 @@
 .App-logo {
     /*animation: App-logo-spin infinite 20s linear;*/
     height: 80px;
-    color: #a324d9 !important;
+    color: #56050F !important;
 }
 
 .App-header {
     background-color: #222;
     height: 150px;
     padding: 20px;
-    color: white;
+    color: #FCFBEF;
 }
 
 .App-intro {
