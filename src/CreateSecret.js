@@ -120,4 +120,3 @@ CreateSecret.propTypes = {
 };
 
 export default CreateSecret;
-

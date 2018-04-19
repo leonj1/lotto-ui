@@ -9,4 +9,3 @@ class PowerBall extends Component {
 }
 
 export default PowerBall;
-
