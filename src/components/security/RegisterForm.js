@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Register.css";
+import PropTypes from 'prop-types';
 
 class RegisterForm extends Component {
     constructor(props) {
@@ -9,6 +10,7 @@ class RegisterForm extends Component {
             email: "",
             password: ""
         };
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     validateForm() {
@@ -59,7 +61,12 @@ class RegisterForm extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
+        this.props.onClickRegister(this.state);
     };
 }
+
+RegisterForm.Proptypes = {
+    onClickRegister: PropTypes.func.isRequired
+};
 
 export default RegisterForm;

@@ -15,7 +15,7 @@ import FeedbackSubmit from './components/FeedbackSubmit';
 import Profile from './components/account/Profile';
 import LoginForm from './components/security/LoginForm';
 import RegisterForm from './components/security/RegisterForm';
-import {submitSecret, fetchSecret, clearPastRequest} from './redux/actions';
+import {registerAccount, loginAccount, logoff} from './redux/actions';
 import {Navbar, NavItem, Nav} from 'react-bootstrap';
 
 class App extends Component {
@@ -30,11 +30,15 @@ class App extends Component {
                 data: {
                     numbers: []
                 }
+            },
+            credentials: {
+                email: "",
+                password: ""
             }
         };
-        this.createSecretHandler = this.createSecretHandler.bind(this);
-        this.fetchSecret = this.fetchSecret.bind(this);
-        this.clearRequest = this.clearRequest.bind(this);
+        this.registerAccountHandler = this.registerAccountHandler.bind(this);
+        this.loginHandler = this.loginHandler.bind(this);
+        this.logoff = this.logoff.bind(this);
     }
 
     componentDidMount() {
@@ -105,51 +109,56 @@ class App extends Component {
                     </Navbar>
 
                     <Route exact path="/" render={(props) => (
-                        <HomePage token={this.props.token} onCreateSecret={this.createSecretHandler}
+                        <HomePage token={this.props.token}
+                                  onCreateSecret={this.registerAccountHandler}
                                   onInitialization={this.clearRequest}/> )}/>
                     <Route path="/add/" render={(props) => (
-                        <AddNumbers request={this.props.request} contents={this.props.secret.message}
+                        <AddNumbers request={this.props.request}
+                                    contents={this.props.secret.message}
                                     onFetchToken={this.fetchSecret}/> )}/>
                     <Route path="/pending/" render={(props) => (
-                        <Pending request={this.props.request} contents={this.props.secret.message}
+                        <Pending request={this.props.request}
+                                 contents={this.props.secret.message}
                                  onFetchToken={this.fetchSecret}/> )}/>
                     <Route path="/history/" render={(props) => (
-                        <History request={this.props.request} contents={this.props.secret.message}
+                        <History request={this.props.request}
+                                 contents={this.props.secret.message}
                                  onFetchToken={this.fetchSecret}/> )}/>
                     <Route path="/admin/" render={(props) => (
-                        <Admin request={this.props.request} contents={this.props.secret.message}
+                        <Admin request={this.props.request}
+                               contents={this.props.secret.message}
                                onFetchToken={this.fetchSecret}/> )}/>
                     <Route path="/account/" render={(props) => (
-                        <Profile request={this.props.request} contents={this.props.secret.message}
+                        <Profile request={this.props.request}
+                                 contents={this.props.secret.message}
                                  onFetchToken={this.fetchSecret}/> )}/>
                     <Route path="/feedback/" render={(props) => (
-                        <FeedbackSubmit request={this.props.request} contents={this.props.secret.message}
+                        <FeedbackSubmit request={this.props.request}
+                                        contents={this.props.secret.message}
                                         onFetchToken={this.fetchSecret}/> )}/>
                     <Route path="/login/" render={(props) => (
-                        <LoginForm request={this.props.request} contents={this.props.secret.message}
-                                   onClickLogin={this.fetchSecret}/> )}/>
+                        <LoginForm request={this.props.request}
+                                   contents={this.props.secret.message}
+                                   onClickLogin={this.loginHandler} /> )}/>
                     <Route path="/register/" render={(props) => (
-                        <RegisterForm request={this.props.request} contents={this.props.secret.message}
-                                   onClickLogin={this.fetchSecret}/> )}/>
+                        <RegisterForm request={this.props.request}
+                                      contents={this.props.secret.message}
+                                      onClickRegister={this.registerAccountHandler} /> )}/>
                 </div>
             </Router>
         );
     }
 
-    createSecretHandler = secret => {
-        this.props.createSecretProp(secret);
+    registerAccountHandler = account => {
+        this.props.registerAccountProp(account);
     };
 
-    loginHandler = secret => {
-        this.props.createSecretProp(secret);
+    loginHandler = account => {
+        this.props.loginUserProp(account);
     };
 
-    fetchSecret = token => {
-        this.props.fetchSecretProp(token);
-    };
-
-    clearRequest = () => {
-        this.props.clearPastRequest();
+    logoff = () => {
+        this.props.logoffUser();
     }
 }
 
@@ -163,14 +172,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        createSecretProp: function (secret) {
-            dispatch(submitSecret(secret));
+        registerAccountProp: function (account) {
+            dispatch(registerAccount(account));
         },
-        fetchSecretProp: function (token) {
-            dispatch(fetchSecret(token));
+        loginUserProp: function (account) {
+            dispatch(loginAccount(account));
         },
-        clearPastRequest: function () {
-            dispatch(clearPastRequest());
+        logoffUser: function () {
+            dispatch(logoff());
         }
     }
 };
