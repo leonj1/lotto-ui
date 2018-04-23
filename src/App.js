@@ -23,6 +23,8 @@ class App extends Component {
         super(props);
         this.state = {
             user: {
+                first_name: "",
+                last_name: "",
                 email: "",
                 token: "",
                 is_admin: "",
@@ -34,7 +36,11 @@ class App extends Component {
             credentials: {
                 email: "",
                 password: ""
-            }
+            },
+            request: {
+              status: "",
+              reason: ""
+          }
         };
         this.registerAccountHandler = this.registerAccountHandler.bind(this);
         this.loginHandler = this.loginHandler.bind(this);

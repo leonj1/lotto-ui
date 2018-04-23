@@ -15,7 +15,7 @@ export const LOGOFF = 'LOGOFF';
 
 export function loginAccount(account) {
 	return {
-		type: START_CREATE_SECRET,
+		type: START_LOGIN_ACCOUNT,
 		payload: account
 	}
 }
@@ -23,7 +23,7 @@ export function loginAccount(account) {
 export function registerAccount(account) {
 	return {
 		type: START_REGISTER_ACCOUNT,
-			payload: account
+		payload: account
 	}
 }
 
